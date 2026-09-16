@@ -262,6 +262,9 @@ body {
   animation: reveal .28s ease both;
 }
 
+.invite-status { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; padding: 24px; background: #fff5ee; }
+.invite-status-card { width: min(100%, 500px); padding: 36px; border: 1px solid rgba(104, 65, 48, .10); border-radius: 30px; background: rgba(255,255,255,.94); box-shadow: 0 18px 65px rgba(96, 46, 30, .08); text-align: center; }
+
 @media (min-width: 768px) {
   .info-card,
   .rsvp-card {
@@ -277,6 +280,8 @@ body {
   .rsvp-card {
     padding: 24px;
   }
+
+  .invite-status-card { padding: 28px 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

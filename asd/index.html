@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Convites — Administração</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <div><p class="eyebrow">Nilda Sunset</p><h1>Convites</h1></div>
+      <button id="newInvite" type="button">Novo convite</button>
+    </header>
+    <p id="saveStatus" class="status" role="status">Carregando convites...</p>
+    <nav class="tabs" aria-label="Visões do dashboard">
+      <button class="tab active" type="button" data-view="simple">Visão rápida</button>
+      <button class="tab" type="button" data-view="extended">Gerenciamento completo</button>
+    </nav>
+    <section id="simpleView" class="panel"><div id="simpleList" class="invite-list"></div><p id="simpleEmpty" class="empty" hidden>Nenhum convite cadastrado.</p></section>
+    <section id="extendedView" class="panel" hidden>
+      <div class="filters">
+        <label>Pesquisar<input id="search" type="search" placeholder="Nome, observação ou código"></label>
+        <label>Envio<select id="sentFilter"><option value="all">Todos</option><option value="true">Enviados</option><option value="false">Não enviados</option></select></label>
+        <label>Confirmação<select id="confirmedFilter"><option value="all">Todos</option><option value="true">Confirmados</option><option value="false">Não confirmados</option></select></label>
+      </div>
+      <div id="extendedList" class="invite-list"></div><p id="extendedEmpty" class="empty" hidden>Nenhum convite encontrado.</p>
+    </section>
+    <section id="editor" class="panel editor" hidden>
+      <div class="section-heading"><h2 id="editorTitle">Novo convite</h2><button id="closeEditor" class="quiet" type="button">Fechar</button></div>
+      <form id="inviteForm">
+        <input id="editingIndex" type="hidden">
+        <div class="form-grid">
+          <label class="wide">Nomes <small>Um nome por linha</small><textarea id="names" required placeholder="Nome 1&#10;Nome 2"></textarea></label>
+          <label>Quantidade de acompanhantes<input id="companions" type="number" min="0" step="1" value="0" required></label>
+          <label>Hash / código único<div class="hash-row"><input id="hash" required pattern="[A-Za-z0-9_-]+"><button id="generateHash" type="button">Gerar</button></div></label>
+          <label class="wide">Mensagem<textarea id="message" required></textarea></label>
+          <label class="wide">Observação<textarea id="note"></textarea></label>
+          <label class="check"><input id="sent" type="checkbox"> Convite enviado</label>
+          <label class="check"><input id="confirmed" type="checkbox"> Convite confirmado/utilizado</label>
+          <label class="wide">Pessoas que confirmaram <small>Um nome por linha</small><textarea id="confirmedNames" placeholder="Nome da pessoa confirmada"></textarea></label>
+        </div>
+        <p id="formError" class="error" hidden></p>
+        <div class="form-actions"><button type="submit">Salvar no convites.json</button><button id="deleteInvite" class="danger" type="button" hidden>Excluir convite</button></div>
+      </form>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
