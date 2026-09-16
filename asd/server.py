@@ -1,6 +1,9 @@
+import argparse
 import json
 import os
 import re
+import secrets
+import socket
 import tempfile
 from http import HTTPStatus
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -44,7 +47,24 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(payload)
 
+    def end_headers(self):
+        if urlparse(self.path).path.startswith("/api/"):
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "GET, PUT, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        super().end_headers()
+
+    def do_OPTIONS(self):
+        if urlparse(self.path).path.startswith("/api/"):
+            self.send_response(HTTPStatus.NO_CONTENT)
+            self.end_headers()
+            return
+        self.send_error(HTTPStatus.NOT_FOUND)
+
     def do_GET(self):
+        if urlparse(self.path).path == "/api/new-hash":
+            self.send_json(HTTPStatus.OK, {"hash": secrets.token_urlsafe(24)})
+            return
         if urlparse(self.path).path == "/api/invites":
             try:
                 with INVITES_FILE.open(encoding="utf-8") as file:
@@ -73,7 +93,15 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    server = ThreadingHTTPServer(("127.0.0.1", 8765), Handler)
-    print("Dashboard: http://127.0.0.1:8765/asd/")
-    print("Site principal: http://127.0.0.1:8765/")
+    parser = argparse.ArgumentParser(description="Servidor local do dashboard de convites")
+    parser.add_argument("--host", default="0.0.0.0", help="Interface de rede (padrão: 0.0.0.0)")
+    parser.add_argument("--port", type=int, default=int(os.getenv("DASHBOARD_PORT", "8765")), help="Porta do servidor (padrão: 8765)")
+    options = parser.parse_args()
+    server = ThreadingHTTPServer((options.host, options.port), Handler)
+    addresses = {address[4][0] for address in socket.getaddrinfo(socket.gethostname(), None, family=socket.AF_INET)}
+    addresses.discard("127.0.0.1")
+    print(f"Dashboard local: http://127.0.0.1:{options.port}/asd/")
+    for address in sorted(addresses):
+        print(f"Dashboard na rede: http://{address}:{options.port}/asd/")
+    print(f"Site principal: http://127.0.0.1:{options.port}/")
     server.serve_forever()

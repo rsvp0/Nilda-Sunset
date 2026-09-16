@@ -1,7 +1,22 @@
 const $ = selector => document.querySelector(selector);
 let invites = [];
+const DEFAULT_MESSAGE = "Com muita alegria, compartilho o convite para o Nilda Sunset! 🎉 Será um prazer celebrar esse momento com você!\n\nAcesse o link abaixo para conferir o convite.";
+const apiOrigin = new URLSearchParams(window.location.search).get("api") || window.location.origin;
+const API_URL = new URL("/api/invites", apiOrigin).href;
 
-function createHash() { return crypto.randomUUID().replaceAll("-", ""); }
+function createHash() {
+  const webCrypto = globalThis.crypto;
+  if (!webCrypto?.getRandomValues) return "";
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
+  const bytes = new Uint8Array(32);
+  webCrypto.getRandomValues(bytes);
+  return [...bytes].map(byte => alphabet[byte % alphabet.length]).join("");
+}
+function createUniqueHash() {
+  let hash = createHash();
+  while (hash && invites.some(invite => invite.hash === hash)) hash = createHash();
+  return hash;
+}
 function splitLines(value) { return value.split("\n").map(item => item.trim()).filter(Boolean); }
 function inviteUrl(invite) { return new URL(`../?hash=${encodeURIComponent(invite.hash)}`, window.location.href).href; }
 
@@ -15,6 +30,10 @@ function setFormError(message = "") {
   const error = $("#formError");
   error.textContent = message;
   error.hidden = !message;
+}
+
+function connectionMessage(error) {
+  return `Não foi possível conectar ao servidor de convites. Verifique se o Python está em execução no PC e se este dispositivo consegue acessar ${apiOrigin}.`;
 }
 
 function normalizeInvite(invite) {
@@ -31,19 +50,31 @@ function normalizeInvite(invite) {
 }
 
 async function loadInvites() {
-  const response = await fetch("/api/invites", { cache: "no-store" });
+  const response = await fetch(API_URL, { cache: "no-store" });
   if (!response.ok) throw new Error("Não foi possível carregar os convites.");
   const data = await response.json();
   if (!Array.isArray(data)) throw new Error("O arquivo convites.json não contém uma lista válida.");
   invites = data.map(normalizeInvite);
 }
 
+async function requestServerHash() {
+  const response = await fetch(new URL("/api/new-hash", apiOrigin).href, { cache: "no-store" });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || !/^[A-Za-z0-9_-]{12,}$/.test(data.hash)) throw new Error("Não foi possível gerar o código do convite.");
+  return data.hash;
+}
+
 async function saveInvites(message = "Alterações salvas no convites.json.") {
-  const response = await fetch("/api/invites", {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(invites)
-  });
+  let response;
+  try {
+    response = await fetch(API_URL, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(invites)
+    });
+  } catch (error) {
+    throw new Error(connectionMessage(error));
+  }
   const data = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(data.error || "Não foi possível salvar os convites.");
   setStatus(message, "success");
@@ -132,7 +163,8 @@ function render() {
 }
 
 function openEditor(index = null) {
-  const invite = index === null ? normalizeInvite({ hash: createHash() }) : invites[index];
+  const generatedHash = index === null ? createUniqueHash() : "";
+  const invite = index === null ? normalizeInvite({ hash: generatedHash, message: DEFAULT_MESSAGE }) : invites[index];
   $("#editorTitle").textContent = index === null ? "Novo convite" : "Editar convite";
   $("#editingIndex").value = index ?? "";
   $("#names").value = invite.names.join("\n");
@@ -145,8 +177,16 @@ function openEditor(index = null) {
   $("#confirmedNames").value = invite.confirmed_names.join("\n");
   $("#deleteInvite").hidden = index === null;
   setFormError();
-  $("#editor").hidden = false;
-  $("#editor").scrollIntoView({ behavior: "smooth", block: "start" });
+  const editor = $("#editor");
+  editor.hidden = false;
+  editor.scrollIntoView?.({ behavior: "smooth", block: "start" });
+  if (index === null && !generatedHash) {
+    setFormError("Gerando um código seguro para o convite...");
+    requestServerHash().then(hash => {
+      if ($("#editingIndex").value === "" && !$("#hash").value) $("#hash").value = hash;
+      setFormError();
+    }).catch(error => setFormError(`${error.message} Verifique a conexão com o servidor no PC.`));
+  }
 }
 
 function closeEditor() { $("#editor").hidden = true; setFormError(); }
@@ -188,8 +228,21 @@ $("#deleteInvite").addEventListener("click", async () => {
   try { await saveInvites("Convite excluído do convites.json."); closeEditor(); render(); } catch (error) { setFormError(error.message); setStatus(error.message, "error"); }
 });
 
-$("#generateHash").addEventListener("click", () => { $("#hash").value = createHash(); });
-$("#newInvite").addEventListener("click", () => openEditor());
+$("#generateHash").addEventListener("click", () => {
+  const hash = createUniqueHash();
+  if (hash) {
+    $("#hash").value = hash;
+    return;
+  }
+  requestServerHash().then(value => { $("#hash").value = value; setFormError(); }).catch(error => setFormError(`${error.message} Verifique a conexão com o servidor no PC.`));
+});
+$("#newInvite").addEventListener("click", () => {
+  try {
+    openEditor();
+  } catch (error) {
+    setStatus(`Não foi possível abrir o formulário: ${error.message}`, "error");
+  }
+});
 $("#closeEditor").addEventListener("click", closeEditor);
 document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
   document.querySelectorAll(".tab").forEach(item => item.classList.toggle("active", item === tab));
@@ -198,4 +251,5 @@ document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", (
 }));
 [$("#search"), $("#sentFilter"), $("#confirmedFilter")].forEach(input => input.addEventListener("input", render));
 
-loadInvites().then(() => { setStatus(`${invites.length} convite(s) carregado(s).`); render(); }).catch(error => setStatus(error.message, "error"));
+loadInvites().then(() => { setStatus(`${invites.length} convite(s) carregado(s).`); render(); }).catch(error => setStatus(connectionMessage(error), "error"));
+window.addEventListener("error", event => setStatus(`Ocorreu um erro no dashboard: ${event.message}`, "error"));

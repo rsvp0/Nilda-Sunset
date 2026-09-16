@@ -19,7 +19,9 @@ O arquivo `convites.json`, na raiz do projeto, é a fonte dos convites. Cada pes
 
 `https://SEU-USUARIO.github.io/Nilda-Sunset/?hash=codigo_unico`
 
-Inicie o dashboard local com `python3 asd/server.py` e abra `http://127.0.0.1:8765/asd/`. Todas as alterações feitas nele são gravadas imediatamente no `convites.json` da raiz. O mesmo servidor também disponibiliza o site principal em `http://127.0.0.1:8765/`.
+Inicie o dashboard local com `python3 asd/server.py` e abra o endereço exibido no terminal. O servidor aceita conexões da rede local e mostra os IPs disponíveis no formato `http://IP-DO-PC:8765/asd/`. Todas as alterações feitas nele são gravadas imediatamente no `convites.json` da raiz. O mesmo servidor também disponibiliza o site principal na mesma porta.
+
+Para usar o dashboard servido separadamente pelo Live Server, acrescente a origem da API na URL: `http://IP-DO-PC:5500/asd/?api=http://IP-DO-PC:8765`. O dashboard usa sua própria origem automaticamente quando é aberto pelo servidor Python.
 
 Para marcar um convite como já utilizado, use o campo de confirmação do dashboard ou altere manualmente o respectivo campo para `"confirmed": true` no `convites.json` e publique a alteração. Convites com esse estado não mostram o formulário.
 
