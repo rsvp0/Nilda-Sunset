@@ -55,6 +55,7 @@ function setupRsvp(invite) {
   $("#inviteNames").textContent = formatNames(invite.names);
   $("#inviteMessage").textContent = invite.message || "Informe os nomes dos acompanhantes. O WhatsApp abrirá com a confirmação já escrita.";
   $("#maxCompanionsLabel").textContent = invite.companions;
+  $("#companionsSection").classList.toggle("hidden", invite.companions === 0);
 
   let companionCount = 0;
   const renderCompanions = () => {
