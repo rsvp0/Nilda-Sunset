@@ -339,5 +339,41 @@
     "confirmed": false,
     "sent": false,
     "confirmed_names": []
+  },
+  {
+    "names": [
+      "Claudia"
+    ],
+    "note": "",
+    "companions": 1,
+    "message": "Com muita alegria, compartilho o convite para o Nilda Sunset! 🎉 Será um prazer celebrar esse momento com você!\n\nAcesse o link abaixo para conferir o convite.",
+    "hash": "l1ngu1maclallyuX63madxPsyCL75C4",
+    "confirmed": false,
+    "sent": false,
+    "confirmed_names": []
+  },
+  {
+    "names": [
+      "Flávia"
+    ],
+    "note": "",
+    "companions": 1,
+    "message": "Com muita alegria, compartilho o convite para o Nilda Sunset! 🎉 Será um prazer celebrar esse momento com você!\n\nAcesse o link abaixo para conferir o convite.",
+    "hash": "l1mdu1makle8iiiWdiekejCL705C4",
+    "confirmed": false,
+    "sent": false,
+    "confirmed_names": []
+  },
+  {
+    "names": [
+      "Poliana"
+    ],
+    "note": "",
+    "companions": 2,
+    "message": "Com muita alegria, compartilho o convite para o Nilda Sunset! 🎉 Será um prazer celebrar esse momento com você!\n\nAcesse o link abaixo para conferir o convite.",
+    "hash": "l1ngu1mamam847XhdgU&PsyCL705C4",
+    "confirmed": false,
+    "sent": false,
+    "confirmed_names": []
   }
 ]
