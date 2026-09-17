@@ -27,6 +27,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <script src="https://cdn.tailwindcss.com"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -47,146 +48,215 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Chau+Philomene+One:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Allura&family=Chau+Philomene+One:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="min-h-screen bg-[#fff5ee] text-[#2b1a17]">
   <main>
-
-    <section class="hero relative min-h-[720px] overflow-hidden sm:min-h-[720px]">
+    <section class="hero relative min-h-[720px] overflow-hidden lg:min-h-[800px] xl:min-h-[850px]">
       <div class="hero-bg absolute inset-0"></div>
-
-      <div class="relative z-10 mx-auto flex min-h-[720px] max-w-6xl items-center justify-center px-6 sm:min-h-[720px] sm:px-10">
-        <div class="w-full max-w-3xl text-center">
-          <p class="reveal text-[11px] font-bold uppercase tracking-[.4em] text-white/80 sm:text-xs">
+      <div class="relative z-10 mx-auto flex min-h-[720px] w-full max-w-7xl items-center justify-center px-6 sm:px-10 lg:min-h-[800px] lg:px-16 xl:min-h-[850px] xl:px-20">
+        <div class="w-full max-w-4xl text-center">
+          <p class="reveal text-[11px] font-bold uppercase tracking-[.4em] text-white/80 sm:text-xs lg:text-sm">
             Você está convidado
           </p>
-          <p id="inviteNames" class="reveal delay-1 mt-3 font-display text-3xl leading-none text-white sm:text-4xl"></p>
-
-          <div class="mt-5">
+          <p
+            id="inviteNames"
+            class="reveal delay-1 mt-3 font-display text-3xl leading-none text-white sm:text-4xl lg:text-5xl"
+          ></p>
+          <div class="mt-5 lg:mt-8">
             <img
               src="title.png"
               alt="Nilda Sunset"
-              class="reveal delay-1 mx-auto w-full max-w-[520px] object-contain"
+              class="reveal delay-1 mx-auto h-auto w-full max-w-[520px] object-contain sm:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px]"
             >
           </div>
-
-          <div class="reveal delay-3 inline-flex items-center gap-4 border-y border-white/65 px-4 py-3 text-white">
-            <span class="text-sm font-bold uppercase tracking-[.22em]">Sábado</span>
-            <span class="h-8 w-px bg-white/55"></span>
-            <span class="font-display text-4xl font-semibold leading-none">10</span>
-            <span class="h-8 w-px bg-white/55"></span>
-            <span class="text-sm font-bold uppercase tracking-[.22em]">às 15h30</span>
+          <div class="reveal delay-3 mx-auto inline-flex max-w-full items-center gap-3 border-y border-white/65 px-4 py-3 text-white sm:gap-4 sm:px-6 sm:py-4 lg:gap-6 lg:px-8 lg:py-5">
+            <span class="text-xs font-bold uppercase tracking-[.22em] sm:text-sm lg:text-base">
+              Sábado
+            </span>
+            <span class="h-7 w-px bg-white/55 sm:h-8 lg:h-10"></span>
+            <span class="font-display text-4xl font-semibold leading-none sm:text-5xl lg:text-6xl">
+              10
+            </span>
+            <span class="h-7 w-px bg-white/55 sm:h-8 lg:h-10"></span>
+            <span class="text-xs font-bold uppercase tracking-[.22em] sm:text-sm lg:text-base">
+              às 15h30
+            </span>
           </div>
-
-          <p class="reveal delay-3 mt-5 text-sm font-semibold uppercase tracking-[.28em] text-white/90">
+          <p class="reveal delay-3 mt-5 text-xs font-semibold uppercase tracking-[.28em] text-white/90 sm:text-sm lg:text-base">
             outubro · Studio29
           </p>
         </div>
       </div>
     </section>
+    <section class="relative mx-auto w-full max-w-7xl px-6 pb-24 sm:px-10 lg:px-16 xl:px-20">
+      <div class="flex w-full flex-col gap-5 lg:flex-row lg:gap-6 xl:gap-8">
+        <article class="info-card page-reveal flex w-full flex-1 flex-col">
+          <p class="section-kicker">
+            DATA
+          </p>
 
-<section class="relative mx-auto max-w-6xl px-6 pb-24 sm:px-10">
+          <h2 class="mt-3 font-display text-5xl leading-none sm:text-6xl">
+            10 de outubro
+          </h2>
 
-  <div class="grid gap-5 md:grid-cols-[.78fr_1.22fr]">
-    <article class="info-card">
-      <p class="section-kicker">A DATA</p>
-      <h2 class="mt-3 font-display text-5xl leading-none">10 de outubro</h2>
-      <p class="mt-0 text-sm leading-6 text-[#674b43]">Sábado</p>
-      <h3 class="mt-4 font-display text-3xl leading-none">Às 15:30</h3>
-    </article>
+          <p class="mt-1 text-sm leading-6 text-[#674b43] sm:text-base">
+            Sábado
+          </p>
 
-    <article class="info-card">
-      <p class="section-kicker">A LOCALIZAÇÃO</p>
-      <h2 class="mt-3 font-display text-4xl leading-[.95] sm:text-5xl">Studio29</h2>
-      <p class="mt-4 text-sm leading-6 text-[#674b43]">
-        Rua Santa Isabel, 29<br>
-        Barro Duro · Maceió, AL<br>
-        CEP 57045-310
-      </p>
-      <a
-        href="https://www.google.com/maps/place/Studio29+-+Festas+e+Eventos/@-9.6201872,-35.7201473,17z/data=!4m6!3m5!1s0x70147a68d86d84f:0x18915ba332182bb1!8m2!3d-9.6201872!4d-35.7201473!16s%2Fg%2F11wn029h_q?entry=ttu"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="map-btn my-3"
-      >
-        Abrir no Google Maps <span>↗</span>
-      </a>
-      <div class="map-frame">
-        <iframe
-          title="Mapa do Studio29 em Maceió"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=Studio29%20-%20Festas%20e%20Eventos%2C%20Rua%20Santa%20Isabel%2029%2C%20Macei%C3%B3%20AL&output=embed">
-        </iframe>
+          <h3 class="mt-4 font-display text-3xl leading-none sm:text-4xl">
+            Às 15:30
+          </h3>
+        </article>
+        <article class="info-card page-reveal page-reveal-delay-1 flex w-full flex-col">
+          <p class="section-kicker">
+            A LOCALIZAÇÃO
+          </p>
+          <h2 class="mt-3 font-display text-4xl leading-[.95] sm:text-5xl">
+            Studio29
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-[#674b43] sm:text-base">
+            Rua Santa Isabel, 29<br>
+            Barro Duro · Maceió, AL<br>
+            CEP 57045-310
+          </p>
+          <a
+            href="https://www.google.com/maps/place/Studio29+-+Festas+e+Eventos/@-9.6201872,-35.7201473,17z/data=!4m6!3m5!1s0x70147a68d86d84f:0x18915ba332182bb1!8m2!3d-9.6201872!4d-35.7201473!16s%2Fg%2F11wn029h_q?entry=ttu"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="map-btn my-3"
+          >
+            Abrir no Google Maps <span>↗</span>
+          </a>
+          <div class="map-frame w-full max-w-full overflow-hidden">
+            <iframe
+              title="Mapa do Studio29 em Maceió"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Studio29%20-%20Festas%20e%20Eventos%2C%20Rua%20Santa%20Isabel%2029%2C%20Macei%C3%B3%20AL&output=embed"
+              class="h-full w-full"
+            ></iframe>
+          </div>
+        </article>
       </div>
-    </article>
-  </div>
-
-      <article id="rsvp" class="rsvp-card mt-5">
-        <div class="max-w-xl">
-          <p class="section-kicker mt-5">CONFIRMAÇÃO DE PRESENÇA</p>
-          <h2 class="mt-3 font-display text-4xl leading-[.95] sm:text-5xl">Vai estar com a gente?</h2>
-          <p class="mt-4 text-sm leading-6 text-[#674b43]">
-            <span id="inviteMessage">Informe os nomes dos acompanhantes. O WhatsApp abrirá com a confirmação já escrita.</span>
+      <article
+        id="rsvp"
+        class="rsvp-card page-reveal page-reveal-delay-2 mt-5 w-full lg:mt-6 xl:mt-8"
+      >
+        <div class="w-full max-w-2xl">
+          <p class="section-kicker mt-5">
+            CONFIRMAÇÃO DE PRESENÇA
+          </p>
+          <h2 class="mt-3 font-display text-4xl leading-[.95] sm:text-5xl lg:text-6xl">
+            Vai estar com a gente?
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-[#674b43] sm:text-base">
+            <span id="inviteMessage">
+              Esperamos você para celebrar esse momento no Nilda Sunset!
+            </span>
           </p>
         </div>
-
-        <form id="rsvpForm" class="mt-9 max-w-2xl space-y-6" novalidate>
+        <form
+          id="rsvpForm"
+          class="mt-9 w-full max-w-3xl space-y-6"
+          novalidate
+        >
           <div id="companionsSection">
             <div class="flex items-end justify-between gap-4">
-              <div>
-                <label class="input-label">Acompanhantes</label>
-                <p class="mt-1 text-xs text-[#84665b]">Até <span id="maxCompanionsLabel">5</span> pessoas.</p>
+              <div class="min-w-0">
+                <label class="input-label">
+                  Acompanhantes
+                </label>
+                <p class="mt-1 text-xs text-[#84665b] sm:text-sm">
+                  Até <span id="maxCompanionsLabel">5</span> pessoas.
+                </p>
               </div>
-
-              <div class="counter">
-                <button type="button" id="minusBtn" aria-label="Diminuir acompanhantes">−</button>
-                <span id="companionCount">0</span>
-                <button type="button" id="plusBtn" aria-label="Aumentar acompanhantes">+</button>
+              <div class="counter flex w-auto shrink-0 items-center">
+                <button
+                  type="button"
+                  id="minusBtn"
+                  aria-label="Diminuir acompanhantes"
+                >
+                  −
+                </button>
+                <span id="companionCount">
+                  0
+                </span>
+                <button
+                  type="button"
+                  id="plusBtn"
+                  aria-label="Aumentar acompanhantes"
+                >
+                  +
+                </button>
               </div>
             </div>
           </div>
-
-          <div id="companionsWrap" class="hidden space-y-4">
-            <p class="input-label !mt-0">Nomes dos acompanhantes</p>
-            <div id="companionsList" class="space-y-4"></div>
+          <div
+            id="companionsWrap"
+            class="hidden w-full space-y-4"
+          >
+            <p class="input-label !mt-0">
+              Nomes dos acompanhantes
+            </p>
+            <div
+              id="companionsList"
+              class="w-full space-y-4"
+            ></div>
           </div>
-
-          <div id="formError" class="hidden rounded-2xl border border-red-300/60 bg-red-50 px-4 py-3 text-sm text-red-900"></div>
-
-          <button type="submit" class="confirm-btn">
-            Confirmar pelo WhatsApp 
+          <div
+            id="formError"
+            class="hidden w-full rounded-2xl border border-red-300/60 bg-red-50 px-4 py-3 text-sm text-red-900"
+          ></div>
+          <button
+            type="submit"
+            class="confirm-btn w-full sm:w-auto"
+          >
+            Confirmar pelo WhatsApp
             <span>↗</span>
           </button>
-
-          <p class="text-center text-[11px] leading-5 text-[#84665b]">Ao tocar no botão, seu WhatsApp será aberto com a mensagem pronta para envio.</p>
+          <p class="text-center text-[11px] leading-5 text-[#84665b] sm:text-left">
+            Ao tocar no botão, seu WhatsApp será aberto com a mensagem pronta para envio.
+          </p>
         </form>
       </article>
-
-      <footer class="py-12 text-center">
+      <footer class="page-reveal page-reveal-delay-3 py-12 text-center lg:py-16">
         <img
           src="title.png"
           alt="Nilda Sunset"
-          class="mx-auto -translate-x-[2vw] w-[200px] object-contain"
+          class="mx-auto w-[200px] object-contain sm:w-[240px] lg:w-[280px]"
         >
         <p class="mt-2 text-[10px] font-bold uppercase tracking-[.3em] text-white">
           sunset · 10 outubro
         </p>
-
       </footer>
     </section>
   </main>
-  <div id="inviteStatus" class="invite-status hidden" role="alert">
+  <div
+    id="inviteStatus"
+    class="invite-status hidden"
+    role="alert"
+  >
     <div class="invite-status-card">
-      <p class="section-kicker">Convite</p>
-      <h1 id="inviteStatusTitle" class="mt-3 font-display text-5xl leading-none"></h1>
-      <p id="inviteStatusText" class="mt-4 text-sm leading-6 text-[#674b43]"></p>
+      <p class="section-kicker">
+        Convite
+      </p>
+      <h1
+        id="inviteStatusTitle"
+        class="mt-3 font-display text-5xl leading-none"
+      ></h1>
+      <p
+        id="inviteStatusText"
+        class="mt-4 text-sm leading-6 text-[#674b43]"
+      ></p>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>

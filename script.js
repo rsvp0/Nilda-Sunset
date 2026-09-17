@@ -53,7 +53,7 @@ function createCompanionInput(index) {
 
 function setupRsvp(invite) {
   $("#inviteNames").textContent = formatNames(invite.names);
-  $("#inviteMessage").textContent = invite.message || "Informe os nomes dos acompanhantes. O WhatsApp abrirá com a confirmação já escrita.";
+  $("#inviteMessage").textContent = "Esperamos você para celebrar esse momento no Nilda Sunset!";
   $("#maxCompanionsLabel").textContent = invite.companions;
   $("#companionsSection").classList.toggle("hidden", invite.companions === 0);
 
@@ -138,4 +138,7 @@ async function loadInvite() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadInvite);
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("is-ready");
+  loadInvite();
+});

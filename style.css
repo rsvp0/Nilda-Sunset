@@ -41,9 +41,23 @@ body {
   animation: reveal .8s cubic-bezier(.2,.72,.2,1) both;
 }
 
+.page-reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(.985);
+  transition: opacity .7s cubic-bezier(.2,.72,.2,1), transform .7s cubic-bezier(.2,.72,.2,1);
+}
+
+body.is-ready .page-reveal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .delay-1 { animation-delay: .06s; }
 .delay-2 { animation-delay: .12s; }
 .delay-3 { animation-delay: .18s; }
+.page-reveal-delay-1 { transition-delay: .10s; }
+.page-reveal-delay-2 { transition-delay: .20s; }
+.page-reveal-delay-3 { transition-delay: .30s; }
 
 @keyframes reveal {
   from {
@@ -284,10 +298,107 @@ body {
   .invite-status-card { padding: 28px 24px; }
 }
 
+/* Telefones compactos e aparelhos com viewport muito estreito. */
+@media (max-width: 380px) {
+  .hero {
+    min-height: max(600px, 100svh) !important;
+  }
+
+  .hero > .relative {
+    min-height: max(600px, 100svh) !important;
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .hero .tracking-\[\.4em\],
+  .hero .tracking-\[\.28em\] {
+    letter-spacing: .20em;
+  }
+
+  .hero .inline-flex {
+    gap: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .hero .text-4xl {
+    font-size: 2rem;
+  }
+
+  section.relative.mx-auto {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .info-card,
+  .rsvp-card {
+    border-radius: 22px;
+    padding: 20px;
+  }
+
+  .info-card .text-5xl,
+  .rsvp-card .text-4xl {
+    font-size: 2.15rem;
+  }
+
+  .map-frame {
+    min-height: 220px;
+  }
+
+  .map-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-kicker,
+  .input-label {
+    letter-spacing: .18em;
+  }
+
+  footer .tracking-\[\.3em\] {
+    letter-spacing: .18em;
+  }
+}
+
+@media (max-width: 320px) {
+  .info-card,
+  .rsvp-card {
+    padding: 17px;
+  }
+
+  #companionsSection > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .counter {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+
+  .counter button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .confirm-btn {
+    min-height: 54px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal,
-  .companion-card {
+  .companion-card,
+  .page-reveal {
     animation: none;
+    transition: none;
+  }
+
+  .page-reveal {
+    opacity: 1;
+    transform: none;
   }
 }
